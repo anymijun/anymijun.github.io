@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="springboot," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="转自OSC源创君 https://my.oschina.net/osccreate/blog/801669  简单易用的 Spring Boot，无疑是 Java 开发初学者的指路明灯，更是资深 Java 开发者的得力助手。快速开发是研发 Spring Boot 的初衷，这不但是一个开发团队的终生追求，也是一个企业解放生产力、提高生产效率的保障。 Spring Boot 的组件化整合规则，完美地整">
+<meta name="keywords" content="springboot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 开发者得力助手，深入实践 Spring Boot">
+<meta property="og:url" content="http://bmweb.me/2017/09/18/Java-开发者得力助手，深入实践-Spring-Boot/index.html">
+<meta property="og:site_name" content="BMWEB">
+<meta property="og:description" content="转自OSC源创君 https://my.oschina.net/osccreate/blog/801669  简单易用的 Spring Boot，无疑是 Java 开发初学者的指路明灯，更是资深 Java 开发者的得力助手。快速开发是研发 Spring Boot 的初衷，这不但是一个开发团队的终生追求，也是一个企业解放生产力、提高生产效率的保障。 Spring Boot 的组件化整合规则，完美地整">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-09-18T09:39:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java 开发者得力助手，深入实践 Spring Boot">
+<meta name="twitter:description" content="转自OSC源创君 https://my.oschina.net/osccreate/blog/801669  简单易用的 Spring Boot，无疑是 Java 开发初学者的指路明灯，更是资深 Java 开发者的得力助手。快速开发是研发 Spring Boot 的初衷，这不但是一个开发团队的终生追求，也是一个企业解放生产力、提高生产效率的保障。 Spring Boot 的组件化整合规则，完美地整">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://bmweb.me/2017/09/18/Java-开发者得力助手，深入实践-Spring-Boot/"/>
+
+
+
+
+
+  <title>Java 开发者得力助手，深入实践 Spring Boot | BMWEB</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BMWEB</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">xiaomigege for BMWEB</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bmweb.me/2017/09/18/Java-开发者得力助手，深入实践-Spring-Boot/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaomigege">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BMWEB">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java 开发者得力助手，深入实践 Spring Boot</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-18T17:36:55+08:00">
+                2017-09-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>转自OSC源创君 <a href="https://my.oschina.net/osccreate/blog/801669" target="_blank" rel="external">https://my.oschina.net/osccreate/blog/801669</a> </p>
+<p>简单易用的 Spring Boot，无疑是 Java 开发初学者的指路明灯，更是资深 Java 开发者的得力助手。快速开发是研发 Spring Boot 的初衷，这不但是一个开发团队的终生追求，也是一个企业解放生产力、提高生产效率的保障。</p>
+<p>Spring Boot 的组件化整合规则，完美地整合了云应用开发工具，使其在云计算领域中处于领先地位，为创建高可用和高性能的服务提供了更加简便和快捷的方法。</p>
+<p>Spring Boot 是从 Spring 框架发展起来的，所以对于使用 Spring 框架的庞大用户群体来说，随着 Spring Boot 的普及使用，将使众多开发者成为它的拥趸。</p>
+<p>因此，在 OSC 第 135 期高手问答中，我们策划了“深入实践 Spring Boot”的主题，并邀请了@快意开发（陈韶健）作为高手嘉宾。</p>
+<p>本文整理了本期高手问答中一些与 Spring Boot 相关的精彩问答。</p>
+<p>一、Spring Boot 适用场景</p>
+<ol>
+<li>企业项目开发的时候，Spring Boot 有哪些使用场景呢，已知的坑是什么呢？</li>
+</ol>
+<p>SSO，分布式文件系统，微服务使用等等，在企业版应用中，这些都是非常顶用的。如果硬说有坑的话，就是服务多了，服务部署和运维管理必须要上一个档次，否则就会显得混乱起来。</p>
+<ol>
+<li>个人感觉，从快速构建方面确实很高效，而且这样框架也是经过了很多实践之后，结晶的产品。但是，对于新人来说，直接应用 Spring Boot，还是感觉不是很理想，可能会使新人对于 Spring 框架的理解上产生阻碍。对于 Spring Boot 本身，还是非常不错的，云部署，快速构建都很不错。我的问题是，公司对于 Spring Boot 的应用有什么要求吗？一般开发会在什么情况下使用它？对于企业级的开发是否也有要求？</li>
+</ol>
+<p>Spring Boot 对背景知识没有特别要求，对于新人来说，搭建好项目让其跟随开发，更加容易入手。对于公司的要求，主要看工程的规模和部署的方式，如果使用 Docker 部署并需要设置负载均衡等对运维人员和服务器的要求会高一些。</p>
+<ol>
+<li>经常看到 Spring Boot 和微服务关联起来，是因为 Spring Boot 开发和部署比较快么，能具体说说么？</li>
+</ol>
+<p>Spring Boot 确实是以快速开发为目标而设计的，它的简单易用的特性确实减轻了开发者的负担，从而可以提高开发的生产率。你的问题需要全面理解一下 Spring Boot，可以通过它的官方网站进行一些了解。</p>
+<p>完整的参考 DEMO — 不写一行代码即运行一个应用</p>
+<ol>
+<li>这个框架适合开发什么类型的项目</li>
+</ol>
+<p>最适合用来开发 Web 应用项目。</p>
+<p>二、Spring Boot 与 jar</p>
+<ol>
+<li>已经使用 Spring Boot 有几个月了，也开始在使用 Spring Boot 搭建公司的基础系统。我理解的 Spring Boot 应该是提倡以 jar 的形式部署，但这种方式在包的体积过大的情况下部署太慢了，之前我们的业务和服务器都在国外，上传的时候速度慢得一塌糊涂，除了改成 war 发布，还有什么其他办法么？</li>
+</ol>
+<p>其实最好的方式，还是使用 jar，然后结合使用 Docker 来发布。如果一个项目的 jar 包过大的话，要看看造成这种情况的主要原因是什么。是不是 jar 包中包含的资源文件太多，还是项目包含的业务太复杂，如果是前种原因，考虑优化一些图片资源，或者使用分布式文件系统来存储图片资源。如果是后一种原因，是不是考虑将原项目使用模块化方式进行细分。</p>
+<p>@采蘑菇的大叔 贡献的 DEMO <a href="http://git.oschina.net/icer/iblog。用" target="_blank" rel="external">http://git.oschina.net/icer/iblog。用</a> SpringBoot 搭了个架子，整合了 freemarker 和 mybatis。</p>
+<ol>
+<li>Spring Boot 集成了服务器，以 jar 文件发布，减少对外部文件和环境依赖。但长期集成导致体积过大，这的确是个问题，能不能考虑做一些工具对 jar 进行减肥呢？</li>
+</ol>
+<p>这就要分析一下造成 jar 过大的原因是什么，如果是因为资源文件太多造成的，那就要优化一些图片的设计，或使用其它方式来链接资源文件，如果是因为一个项目包含的业务太多太复杂造成的，就要考虑是否可以将项目进行拆分。</p>
+<ol>
+<li>如果是用 Spring Boot 来做成 jar 服务启动，怎么衡量服务粒度。因为每个服务都要运行 Spring，或者也会加个 dubbo 的依赖等等。跑起多个实例，这就重复了。其实就是单体应用跟分布式应用的点。</li>
+</ol>
+<p>主要还是看你怎样配置服务，如果使用 Spring Cloud 的服务发现来管理服务，可以通过负载均衡的配置支持多个服务同时对外提供服务。</p>
+<ol>
+<li>Spring Boot 同样支持以标准的 war 方式部署应用，只是在启动类上需要进行细微的调整，并不强调始终以 jar 方式部署。</li>
+</ol>
+<p>Spring Boot 应该是鼓励以 jar 的方式部署，随着 Spring Boot 一起来的应该是想推动微服务。个人见解，仅供讨论。（@采蘑菇的大叔）</p>
+<ol>
+<li>使用 Spring Boot 的时候，页面文件会被打包到 jar 中，如果只更新页面文件，又要对 jar 进行打包上传。有没有简单的方法？类似原先的 Tocmat 部署就可以直接修改页面文件。不需要重启的方法？</li>
+</ol>
+<p>可以使用 war 方式部署 。</p>
+<ol>
+<li>Spring Boot 项目如何做到 libs jar 和  app jar 分开，很多时候，我只是更新应用层代码，本地编译好上传上去，启动的时候通过脚本启动，那么如何将 libs 和 app 分别打包并启动呢？</li>
+</ol>
+<p>使用 war 方式发布就可以实现你的要求。</p>
+<p>三、Spring Boot 与 Docker</p>
+<ol>
+<li>请简单介绍一下 Spring Boot 和 Docker 结合</li>
+</ol>
+<p>真要简单地说：将 Spring Boot 项目打包成 jar，然后通过 Docker 进行部署。用 Spring Boot 开发的项目，非常适合用 Docker 来部署。</p>
+<p>这两个东西之间没有任何关系。Spring Boot 主要的目的是简化开发和部署过程中配置文件的使用，使用了很多约定俗成的规则，按照这些约定的规则来开发，可以大大减少配置文件的使用，甚至完全不使用配置文件都是可能的。Docker 只是把运行环境，像 OS、JVM、Nginx 等等打包到一起的个工具而已。把 Spring Boot 生成的可执行的 jar 包放进这个运行环境中来运行。这两个工具都只是简化了开发和运维的繁杂过程，使用了很多自动化处理的技术而已。（@清靜無虞）</p>
+<ol>
+<li>Spring Boot 从开发到部署的最佳实践 ，是否必须依赖容器技术，如何平滑过渡到 Docker 容器上?</li>
+</ol>
+<p>Spring Boot 并不依赖 Docker 容器，也可以使用 war 方式或者按照传统的方式直接使用文件系统来发布，只是使用 Docker，更能发挥它在各个方面优势。</p>
+<ol>
+<li>能分享下 Spring Cloud 和 Docker 部署方面的经验吗？</li>
+</ol>
+<p>使用 Docker 发布 Spring Boot 项目（<a href="https://my.oschina.net/syic/blog/799656）" target="_blank" rel="external">https://my.oschina.net/syic/blog/799656）</a></p>
+<p>四、旧的项目迁移至 Spring Boot</p>
+<ol>
+<li>旧的项目转到 Spring Boot 有什么条件？</li>
+</ol>
+<p>不需要什么条件，使用 Spring Boot，最好是对原来的项目进行重新设计，或者使得原来的逻辑进行重建。</p>
+<ol>
+<li>是不是微服务架构比较适合用 Spring Boot？那对于老的系统或代码，怎么转到 Spring Boot？</li>
+</ol>
+<p>所有使用 Web 方式开发的项目都适合使用 Spring Boot 框架，并从中获益，微服务开发是它的一大特色。旧系统的代码不能转换，可以使用原来的业务逻辑进行重建。</p>
+<p>五、与相关的项目对比</p>
+<ol>
+<li>几年前做开发还是用的 Spring，包括 Spring 的 Bean 工厂方案还有 SpringMVC，现在主要业务的开发一般用的公司自研框架，所以对 Spring 感觉比较生疏了，我就想了解了解，Spring Boot 同几年前的 Spring 相比，都有哪些方面的发展和变化，能大概讲讲吗？</li>
+</ol>
+<p>Spring Boot 是在 Spring 的基础建立起来的，保留了 Spring 的一些精髓，同时也摒弃了一些糟粕，表现在：</p>
+<p>统一工程配置，可以不使用 XML 配置<br>使用一些组件，具有自动配置的功能<br>内嵌了 Tomcat，性能指标等服务<br>更方便独立部署或使用 Docker 配置成高可用和高性能的平台</p>
+<ol>
+<li>Spring Boot 与传统 SSH 框架的主要区别在哪些方面？</li>
+</ol>
+<p>Spring Boot 能最大限度地简化配置，也可以嵌入 Tcomcat 等服务，并且在开发企业级应用、分布式应用等方面更加得心应手，更加难能可贵的是使用非常简单，非常适合快速开发的需要，符合软件工程构件化发展的目标。</p>
+<ol>
+<li>Spring Boot 和 Spring MVC 有什么区别？</li>
+</ol>
+<p>Spring MVC 还是属于 Spring 框架的，Spring Boot 是在 Spring 的基础之上建立的一个全新开发框架。</p>
+<ol>
+<li>Spring Boot 构建微服务，和目前一些新的例如 light java framework , sparkjava 在构建微服务上有什么优势？</li>
+</ol>
+<p>在 Spring Boot 家族中，使用云应用开发工具集 Spring Cloud 开发微服务应用，具有得天独厚的优势。这里所说的微服务，是指功能强大，业务单一的分布式应用系统，并非简单指项目的微型结构。</p>
+<ol>
+<li>用了 Spring Boot 是不是就不用再搞 Spring、SpringMVC、Hibernate、Struts、MyBatis 这些了？</li>
+</ol>
+<p>对的，十分正确。对于数据库来说，使用 JPA 就能一网打尽了。</p>
+<ol>
+<li>Spring Boot 还是很喜欢的，简化了不少配置，但实际中微服务的划分是个问题。</li>
+</ol>
+<p>服务的划分这个和 Spring Boot 没有任何关系。微服务的一个难点就是服务的划分，有些服务是按技术特点来划分，比如像 push 服务、sms 服务等。有些是按业务特点来划分，像订单服务等，有些根据实际情况还进行服务的分层。</p>
+<ol>
+<li>使用 Spring Boot，其他的必须框架还需要配置吗？</li>
+</ol>
+<p>如果使用 Maven 或其它项目管理工具，都可以在工程配置引用依赖包。</p>
+<p>六、使用中遇到的问题</p>
+<ol>
+<li>Spring Boot 有多种 Web 容器如默认的 Tomcat, Undertow 等，从综合上使用哪一个性能更好。Undertow 如何像 Tomcat一样配置 http 自动跳转到 https？</li>
+</ol>
+<p>跟 Tomcat 相比，Jetty 会显得更加小巧一些，但是综合来看，还是使用默认的 Tomcat 比较实在。</p>
+<p>Undertow 比 Tomcat 性能要好得多，https 一般不需要在 Undertow 这一层来配。一般都会在 Undertow 之前加一个 Nginx，在 Nginx中配置就行了。（@清靜無虞）</p>
+<p>性能测试 Undertow 比 Tomcat 稍好一些。稳妥可以用 Tomcat，想改换一下思路可以用 Undertow。http redirect to https 用 Undertow 有折中的办法是引入 Spring Security。不过一般还是应该前端配 Nginx 或者 Apache Http Server 对外开放 https 服务，内部用 http 做反向代理通道协议。（@二的基本算合格）</p>
+<p><a href="http://menelic.com/2016/01/06/java-rest-api-benchmark-tomcat-vs-jetty-vs-grizzly-vs-undertow/看了这个博客，虽然" target="_blank" rel="external">http://menelic.com/2016/01/06/java-rest-api-benchmark-tomcat-vs-jetty-vs-grizzly-vs-undertow/看了这个博客，虽然</a> Tomcat 慢一些，但是实际业务中 Tomcat 并不会是瓶颈，使用 Tomcat 也是一个很好的选择，毕竟使用了这么多年了，对各项配置也比较熟悉了。（@梦朝思夕）</p>
+<p>2.</p>
+<p>我用 Spring Boot 很久了，从 1.2.5 开始用，最近一个项目预计使用分布式高可用，我也把该弄的框架都弄好了，可是最后客户取消分布式高可用，采用传统模式。Java 只负责后台接口，APP 接受数据，我现在有个权限问题，原来用的 Spring Security 做的权限前后端分离，现在只有接口，这个权限怎么进行管理，我看里面有回答说用 Spring Cloud 进行权限控制，这个 Cloud 对传统模式是否繁重？<br>定时任务的调度，自有 Quartz 调度是否支持集群，多个节点（非集群 ng 分发），但是定时任务我想让他集群，不允许多个节点都启动调度任务，只能某一节点不能执行其他节点才能触发，这个需要用 zookeeper 之类工具进行监测么？<br>对于企业级应用来说，权限管理建议使用 SSO 的方式来实现，这在《深入实践 Spring Boot》一书中有实际的使用实例，主要也是使用了 Spring Security 和 OAuth2 的技术。</p>
+<p>Zookeeper 和 Spring-Cloud-Eureka 一样，都是一个服务注册和发现的管理工具，而 Spring-Cloud-Eureka 在 Spring Boot 中使用，更加适合用来调度使用 Spring Cloud 开发的微服务。至于你所说的定时任务调度，应该不属于这个范围吧。</p>
+<p>折腾权限会有个 csrf 的问题，楼主要是弄好了分享一下心得呗。问题：开启 csrf 的话，渲染页面模版的时候，会生成一个 csrf 字符串，如果 post 提交可以带上，但如果写出是 json 的接口，就取不到这个 csrf 了，那么在提交 post 请求的时候就会报一个 csrf 相关的错误。（@朋也）</p>
+<ol>
+<li>Spring Boot 如何更好的更简洁的实现多表关联查询？</li>
+</ol>
+<p>在实体建模时为多表建立关联关系，这样查询一个实体对象时就可以连带查出它关联的其它对象，即实现多表关联查询。</p>
+<p>4.</p>
+<p>使用 Spring Boot 搭建的微服务是否考虑服务之间的权限，例如访问权限，若需要，Spring Boot 本身有提供比较好的解决方案吗？<br>Spring Boot 目前对于 Spring Cloud 生态有很好的支持和定制化吗？<br>Spring Boot 及其前身 Spring，对于任何第三方都能提供很好的支持，更不用说对 Spring Cloud 的支持了。对于系统的安全管理和访问控制，推荐使用 Spring Cloud 的 SSO，它与 Spring Boot 框架能够达到非常融洽的效果。</p>
+<ol>
+<li>在使用 Spring Boot 来开发公司产品的时候，根据业务进行拆分，这样最后部署的时候会出现 N 个 jar。这样的情况下，除了用 Docker 来部署还有别的什么方式吗？在部署方面有没有哪些需要注意的地方？</li>
+</ol>
+<p>N 好像有点大吧，原来的工程分成十几个项目，已经很不错了。使用 Spring Boot 的好处是，可以统一项目配置，和使用发现服务，并更好地管理负载均衡，提高系统的高可用性。</p>
+<ol>
+<li>请问用 jar 的方式发布，如何在系统重启后能自动启动？</li>
+</ol>
+<p>Spring Boot 打包的是个可运行的 jar，使用 Java 命令来启动。写个 shell 脚本来启动就行了，把 shell 脚本设置为开机运行。不管使用哪种方式部署，自动启动都需要编写脚本来实现。（@清靜無虞）</p>
+<ol>
+<li>在 Spring Boot 中，如何通过参数配置，设置 Tomcat 的 maxConnections 属性？</li>
+</ol>
+<p>在 Spring Boot 的配置文件中好像没有这个配置参数，如果一定要这个配置，也可以将项目用 war 方式发布，然后像以前配置 Tomcat 一样配置。</p>
+<ol>
+<li>Spring Boot 做 REST API 开发如何？如果 Controller 接受的参数模型比较复杂，基本是对象一层套一层，那如何定制这类的 API 接口？</li>
+</ol>
+<p>在存储库接口中使用注解 @RepositoryRestResource，就能直接提供 Rest API<br>在控制器中使用 @RestController，其中所定义的 URL 就同时是一个 Rest 资源</p>
+<ol>
+<li>Spring Boot 在开发阶段有热部署吗？类似 JRebel 那种</li>
+</ol>
+<p>如果设置成连接 Tomcat 服务器来启动应用，可以设置成热部署的方式。</p>
+<p>有关 Spring Boot 的相关问答内容至此结束。开源中国的技术问答区上面活跃着很多技术大牛，欢迎各位在上面踊跃提问和回答。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/springboot/" rel="tag"># springboot</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/14/cloud-环境搭建/" rel="next" title="cloud 环境搭建">
+                <i class="fa fa-chevron-left"></i> cloud 环境搭建
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <p class="site-author-name" itemprop="name">xiaomigege</p>
+            <p class="site-description motion-element" itemprop="description">start from zero</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">Kategorien</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaomigege</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a></div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2144681"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
